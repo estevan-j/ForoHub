@@ -21,6 +21,6 @@ public class TopicController {
     @PostMapping()
     public ResponseEntity<TopicResponse> createNewTopic(@RequestBody @Valid TopicData topicData){
         TopicResponse topic = topicService.createTopic(topicData);
-
+        return ResponseEntity.ok(topic);
     }
 }
