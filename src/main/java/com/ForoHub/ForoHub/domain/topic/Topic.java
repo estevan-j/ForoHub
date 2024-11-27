@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity(name = "Topic")
@@ -21,8 +22,16 @@ public class Topic {
     private Long id;
     private String title;
     private String message;
-    private Date creationDate;
+    private LocalDate creationDate;
 //    private String status;
     private String author;
     private String course;
+
+    public Topic(TopicData topicData) {
+        this.title = topicData.title();
+        this.message = topicData.message();
+        this.creationDate = LocalDate.now();
+        this.author = topicData.author();
+        this.course = topicData.course();
+    }
 }
