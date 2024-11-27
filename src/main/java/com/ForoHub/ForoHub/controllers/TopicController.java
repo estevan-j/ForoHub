@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/topics/")
-public class Topic {
+public class TopicController {
 
     @Autowired
     private TopicService topicService;
 
     @PostMapping()
     public ResponseEntity<TopicResponse> createNewTopic(@RequestBody @Valid TopicData topicData){
-
+        TopicResponse topic = topicService.createTopic(topicData);
 
     }
 }
