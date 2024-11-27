@@ -14,6 +14,11 @@ public class TopicService {
     private TopicRepository topicRepository;
 
     public TopicResponse createTopic(TopicData topicData) {
-        Topic topic = new Topic(topicData);
+        Topic topic = topicRepository.save(new Topic(topicData));
+        return convertTopicToTopicResponseDTO(topic);
+    }
+
+    private TopicResponse convertTopicToTopicResponseDTO(Topic topic){
+        return new TopicResponse(topic.getId(), topic.getTitle(), topic.getMessage(), topic.getAuthor(), topic.getCourse(), topic.getCreationDate());
     }
 }

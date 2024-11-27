@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/topics/")
@@ -19,8 +22,9 @@ public class TopicController {
     private TopicService topicService;
 
     @PostMapping()
-    public ResponseEntity<TopicResponse> createNewTopic(@RequestBody @Valid TopicData topicData){
+    public ResponseEntity<TopicResponse> createNewTopic(@RequestBody @Valid TopicData topicData, UriComponentsBuilder uriComponentsBuilder){
         TopicResponse topic = topicService.createTopic(topicData);
-        return ResponseEntity.ok(topic);
+        URI url = uriComponentsBuilder.path("/topics/{id}").buildAndExpand(topic.id()).toUri();
+        return ResponseEntity.created(url).body(topic);
     }
 }
