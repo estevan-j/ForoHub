@@ -31,4 +31,10 @@ public class TopicController {
         List<TopicResponse> topics = topicService.getTopics();
         return ResponseEntity.ok(topics);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TopicResponse> getTopicById(@PathVariable Long id){
+        TopicResponse topic = topicService.searchTopicBy(id);
+        return ResponseEntity.ok(topic);
+    }
 }

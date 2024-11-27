@@ -28,4 +28,9 @@ public class TopicService {
         List<Topic> topics = topicRepository.findAll();
         return topics.stream().map(topic -> convertTopicToTopicResponseDTO(topic)).toList();
     }
+
+    public TopicResponse searchTopicBy(Long id) {
+        Topic topic = topicRepository.getReferenceById(id);
+        return convertTopicToTopicResponseDTO(topic);
+    }
 }
