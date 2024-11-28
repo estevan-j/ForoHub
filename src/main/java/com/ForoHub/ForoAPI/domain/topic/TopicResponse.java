@@ -1,7 +1,6 @@
-package com.ForoHub.ForoHub.domain.topic;
+package com.ForoHub.ForoAPI.domain.topic;
 
-import com.ForoHub.ForoHub.domain.Status;
-import jakarta.validation.constraints.NotBlank;
+import com.ForoHub.ForoAPI.domain.Status;
 
 import java.time.LocalDate;
 

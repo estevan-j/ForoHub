@@ -1,17 +1,16 @@
-package com.ForoHub.ForoHub.services;
+package com.ForoHub.ForoAPI.services;
 
-import com.ForoHub.ForoHub.domain.topic.Topic;
-import com.ForoHub.ForoHub.domain.topic.TopicData;
-import com.ForoHub.ForoHub.domain.topic.TopicResponse;
-import com.ForoHub.ForoHub.domain.topic.TopicUpdate;
-import com.ForoHub.ForoHub.repositories.TopicRepository;
+import com.ForoHub.ForoAPI.domain.topic.Topic;
+import com.ForoHub.ForoAPI.domain.topic.TopicData;
+import com.ForoHub.ForoAPI.domain.topic.TopicResponse;
+import com.ForoHub.ForoAPI.domain.topic.TopicUpdate;
+import com.ForoHub.ForoAPI.repositories.TopicRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 @Service
@@ -26,7 +25,7 @@ public class TopicService {
     }
 
     private TopicResponse convertTopicToTopicResponseDTO(Topic topic){
-        return new TopicResponse(topic.getId(), topic.getTitle(), topic.getMessage(), topic.getAuthor(), topic.getCourse(), topic.getCreationDate());
+        return new TopicResponse(topic.getId(), topic.getTitle(), topic.getMessage(), topic.getAuthor(), topic.getCourse(), topic.getStatus(), topic.getCreationDate());
     }
 
     public List<TopicResponse> getTopics() {

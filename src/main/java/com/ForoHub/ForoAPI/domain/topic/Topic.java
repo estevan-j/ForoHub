@@ -1,11 +1,11 @@
-package com.ForoHub.ForoHub.domain.topic;
+package com.ForoHub.ForoAPI.domain.topic;
 
 
+import com.ForoHub.ForoAPI.domain.Status;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity(name = "Topic")
 @Table(name = "topics")
@@ -21,7 +21,7 @@ public class Topic {
     private String title;
     private String message;
     private LocalDate creationDate;
-//    private String status;
+    private Status status;
     private String author;
     private String course;
 

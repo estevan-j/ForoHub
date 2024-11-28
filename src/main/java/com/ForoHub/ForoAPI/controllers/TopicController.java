@@ -1,9 +1,9 @@
-package com.ForoHub.ForoHub.controllers;
+package com.ForoHub.ForoAPI.controllers;
 
-import com.ForoHub.ForoHub.domain.topic.TopicData;
-import com.ForoHub.ForoHub.domain.topic.TopicResponse;
-import com.ForoHub.ForoHub.domain.topic.TopicUpdate;
-import com.ForoHub.ForoHub.services.TopicService;
+import com.ForoHub.ForoAPI.domain.topic.TopicData;
+import com.ForoHub.ForoAPI.domain.topic.TopicResponse;
+import com.ForoHub.ForoAPI.domain.topic.TopicUpdate;
+import com.ForoHub.ForoAPI.services.TopicService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

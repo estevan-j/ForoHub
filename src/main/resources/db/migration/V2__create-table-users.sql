@@ -5,4 +5,4 @@ CREATE TABLE users
     password VARCHAR(255) NOT NULL         -- Password field to store hashed passwords
 );
 
-INSERT INTO users(username, password) VALUES ("adminForo", "27f92a771beb81c342977188dd65477d241c4f31fb3a8f633a6b6a426d6a1e3c");
+INSERT INTO users(username, password) VALUES ("adminForo", "0F2C082AEFC8251D1D782A63CD8FBA8205C4299E8469FF4EAA2B7B7E95929834");

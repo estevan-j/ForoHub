@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: ForoHub
-  datasource:
-    url: ${DATA_SOURCE_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}

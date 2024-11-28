@@ -1,9 +1,6 @@
-package com.ForoHub.ForoHub.domain.topic;
+package com.ForoHub.ForoAPI.domain.topic;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
-import java.util.Date;
 
 public record TopicData(
         @NotBlank
