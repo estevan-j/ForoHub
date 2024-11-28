@@ -2,6 +2,7 @@ package com.ForoHub.ForoHub.controllers;
 
 import com.ForoHub.ForoHub.domain.topic.TopicData;
 import com.ForoHub.ForoHub.domain.topic.TopicResponse;
+import com.ForoHub.ForoHub.domain.topic.TopicUpdate;
 import com.ForoHub.ForoHub.services.TopicService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/topics/")
+@RequestMapping("/topics")
 public class TopicController {
 
     @Autowired
@@ -37,4 +38,11 @@ public class TopicController {
         TopicResponse topic = topicService.searchTopicBy(id);
         return ResponseEntity.ok(topic);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TopicResponse> updateTopic(@PathVariable Long id, @RequestBody @Valid TopicUpdate topicData){
+        TopicResponse updatedTopic = topicService.updateTopic(id, topicData);
+        return ResponseEntity.ok(updatedTopic);
+    }
+
 }
