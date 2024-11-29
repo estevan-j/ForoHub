@@ -1,5 +1,6 @@
 package com.ForoHub.ForoAPI.services;
 
+import com.ForoHub.ForoAPI.domain.Status;
 import com.ForoHub.ForoAPI.domain.topic.Topic;
 import com.ForoHub.ForoAPI.domain.topic.TopicData;
 import com.ForoHub.ForoAPI.domain.topic.TopicResponse;
@@ -8,6 +9,8 @@ import com.ForoHub.ForoAPI.repositories.TopicRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,12 +28,12 @@ public class TopicService {
     }
 
     private TopicResponse convertTopicToTopicResponseDTO(Topic topic){
-        return new TopicResponse(topic.getId(), topic.getTitle(), topic.getMessage(), topic.getAuthor(), topic.getCourse(), topic.getStatus(), topic.getCreationDate());
+        return new TopicResponse(topic.getId(), topic.getTitle(), topic.getMessage(), topic.getAuthor(), topic.getCourse(), topic.getStatus(), topic.getCreatedAt());
     }
 
-    public List<TopicResponse> getTopics() {
-        List<Topic> topics = topicRepository.findAll();
-        return topics.stream().map(topic -> convertTopicToTopicResponseDTO(topic)).toList();
+    public Page<TopicResponse> getTopics(Pageable pagination) {
+        Page<Topic> topics = topicRepository.findAll(pagination);
+        return topics.map(topic -> convertTopicToTopicResponseDTO(topic));
     }
 
     public TopicResponse searchTopicBy(Long id) {
@@ -54,5 +57,11 @@ public class TopicService {
         if (value != null && !value.isBlank()) {
             updater.accept(value);
         }
+    }
+
+    public void deleteTopic(Long id) {
+        Topic topic = topicRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Topic no encontrado con ID: " + id));
+        topic.setStatus(Status.INACTIVE);
     }
 }

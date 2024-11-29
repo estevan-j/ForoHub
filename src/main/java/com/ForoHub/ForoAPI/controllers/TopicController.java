@@ -6,6 +6,9 @@ import com.ForoHub.ForoAPI.domain.topic.TopicUpdate;
 import com.ForoHub.ForoAPI.services.TopicService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -28,8 +31,8 @@ public class TopicController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<TopicResponse>> getAllTopics(){
-        List<TopicResponse> topics = topicService.getTopics();
+    public ResponseEntity<Page<TopicResponse>> getAllTopics(@PageableDefault(size = 5) Pageable pagination){
+        Page<TopicResponse> topics = topicService.getTopics(pagination);
         return ResponseEntity.ok(topics);
     }
 
@@ -43,6 +46,12 @@ public class TopicController {
     public ResponseEntity<TopicResponse> updateTopic(@PathVariable Long id, @RequestBody @Valid TopicUpdate topicData){
         TopicResponse updatedTopic = topicService.updateTopic(id, topicData);
         return ResponseEntity.ok(updatedTopic);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteTopic(@PathVariable Long id){
+        topicService.deleteTopic(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

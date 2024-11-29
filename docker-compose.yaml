@@ -1,0 +1,39 @@
+#
+services:
+  mysql:
+    image: mysql:8.0.33
+    container_name: mysql-container-foro
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: Foro
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - foro-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: springboot-api
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: ${DATA_SOURCE_URL}/Foro
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    networks:
+      - foro-network
+
+networks:
+  foro-network:
+    driver: bridge
+volumes:
+  mysql-data:
+

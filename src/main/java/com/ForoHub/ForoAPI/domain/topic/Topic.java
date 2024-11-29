@@ -20,7 +20,8 @@ public class Topic {
     private Long id;
     private String title;
     private String message;
-    private LocalDate creationDate;
+    private LocalDate createdAt;
+    @Enumerated(EnumType.STRING)
     private Status status;
     private String author;
     private String course;
@@ -28,8 +29,9 @@ public class Topic {
     public Topic(TopicData topicData) {
         this.title = topicData.title();
         this.message = topicData.message();
-        this.creationDate = LocalDate.now();
+        this.createdAt = LocalDate.now();
         this.author = topicData.author();
+        this.status = Status.ACTIVE;
         this.course = topicData.course();
     }
 }
