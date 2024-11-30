@@ -13,4 +13,5 @@ public class AppExceptionHandler {
     public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException e){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
+
 }
