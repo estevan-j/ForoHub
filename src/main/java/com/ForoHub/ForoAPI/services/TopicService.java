@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -32,7 +33,7 @@ public class TopicService {
     }
 
     public Page<TopicResponse> getTopics(Pageable pagination) {
-        Page<Topic> topics = topicRepository.findAll(pagination);
+        Page<Topic> topics = topicRepository.findAllActivesTopics(pagination);
         return topics.map(topic -> convertTopicToTopicResponseDTO(topic));
     }
 
@@ -59,6 +60,7 @@ public class TopicService {
         }
     }
 
+    @Transactional
     public void deleteTopic(Long id) {
         Topic topic = topicRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Topic no encontrado con ID: " + id));

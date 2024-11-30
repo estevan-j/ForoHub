@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 
 
 public interface TopicRepository extends JpaRepository<Topic, Long> {
-
     @Query("SELECT t FROM Topic t WHERE t.status <> 'INACTIVE'")
-    Page<Topic> findAllActives(Pageable pageable);
+    Page<Topic> findAllActivesTopics(Pageable pagination);
 }
