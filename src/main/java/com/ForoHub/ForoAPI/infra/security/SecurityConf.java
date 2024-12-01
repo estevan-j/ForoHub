@@ -28,7 +28,8 @@ public class SecurityConf {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)  // Stateless session for API security
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST, "/login").permitAll()  // Exempting /login from authentication
+                .requestMatchers(HttpMethod.POST, "/api/login").permitAll()  // Exempting /login from authentication
+                .requestMatchers("/swagger-ui.html", "/swagger-html/**").permitAll()
                 .anyRequest().authenticated()  // All other requests need to be authenticated
                 .and()
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

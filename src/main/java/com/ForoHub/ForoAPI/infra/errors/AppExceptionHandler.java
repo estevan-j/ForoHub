@@ -34,4 +34,10 @@ public class AppExceptionHandler {
         );
         return ResponseEntity.badRequest().body(errorMsg);
     }
+
+    @ExceptionHandler(CustomValidationsErrors.class)
+    public ResponseEntity<ErrorResponse> handleCustomValidationsErrors(CustomValidationsErrors errors){
+        ErrorResponse errorMsg = new ErrorResponse(HttpStatus.BAD_REQUEST.value(), errors.getMessage(), "Invalid JSON");
+        return ResponseEntity.badRequest().body(errorMsg);
+    }
 }
