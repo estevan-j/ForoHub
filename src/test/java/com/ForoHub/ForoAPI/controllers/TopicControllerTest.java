@@ -3,6 +3,7 @@ package com.ForoHub.ForoAPI.controllers;
 import com.ForoHub.ForoAPI.domain.Status;
 import com.ForoHub.ForoAPI.domain.topic.TopicData;
 import com.ForoHub.ForoAPI.domain.topic.TopicResponse;
+import com.ForoHub.ForoAPI.domain.topic.TopicUpdate;
 import com.ForoHub.ForoAPI.services.TopicService;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.DisplayName;
@@ -25,6 +26,8 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.test.web.servlet.MockMvc;
 
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -50,6 +53,9 @@ class TopicControllerTest {
 
     @Autowired
     private JacksonTester<Page<TopicResponse>> pageJson;
+
+    @Autowired
+    private JacksonTester<TopicUpdate> topicUpdateJson;
 
     @MockBean // replace a Bean componente for MockBean
     private TopicService topicService;
@@ -139,8 +145,21 @@ class TopicControllerTest {
     @Test
     @DisplayName("Return HTTP 200 with topic json updated")
     @WithMockUser
-    void updateTopic() {
+    void updateTopic() throws Exception {
+        TopicUpdate newData = new TopicUpdate("c# Advance2", "topic about c#", "software");
+        var updatedTopic = new TopicResponse(1L,newData.title(), newData.message(), "anyAuthor", newData.course(), Status.ACTIVE, LocalDate.now());
 
+        when(topicService.updateTopic(eq(1L),any(TopicUpdate.class))).thenReturn(updatedTopic);
+        var response = mockMvc.perform(put("/api/topics/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                        .content(topicUpdateJson.write(newData).getJson())
+                )
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse();
+
+        var expectedJson = topicResponseJson.write(updatedTopic).getJson();
+        assertEquals(expectedJson, response.getContentAsString());
     }
 
     @Test

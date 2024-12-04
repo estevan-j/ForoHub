@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.LocalDate;
 import java.util.function.Consumer;
 
 @Service
@@ -50,6 +51,7 @@ public class TopicService {
         updateIfNotBlank(topic::setMessage, topicData.message());
         updateIfNotBlank(topic::setCourse, topicData.course());
         updateIfNotBlank(topic::setTitle, topicData.title());
+        topic.setCreatedAt(LocalDate.now());
         topicRepository.save(topic);
         return convertTopicToTopicResponseDTO(topic);
     }
