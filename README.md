@@ -3,6 +3,11 @@
 Este proyecto es una API REST desarrollada con **Spring Boot**, diseñada para gestionar un foro en línea llamado **ForoHub**. La API incluye funcionalidades de creación, consulta de publicaciones y temas, además de autenticación y autorización mediante **JWT (JSON Web Tokens)** para garantizar la seguridad de las operaciones.
 
 ## Tecnologias
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.0.0-brightgreen)
+![Docker](https://img.shields.io/badge/Docker-24.0.0-blue)
+![Java](https://img.shields.io/badge/Java-23-orange)
+![MySQL](https://img.shields.io/badge/MySQL-8.0.33-blue)
+
 
 ## 📑 Características principales  
 
