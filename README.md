@@ -15,6 +15,25 @@ Este proyecto es una API REST desarrollada con **Spring Boot**, diseñada para g
 
 ## 🚀 Endpoints de la API  
 
+### **1. `/api/login`**  
+
+#### **[POST] Login**  
+Permite a un usuario autenticarse en la app.  
+
+- **URL**: `/api/posts`  
+- **Request Body (JSON)**:  
+  ```json
+
+### **1. `/api/topics`** 
+#### **[POST] Crear una topico**  
+Permite a un usuario autenticado crear una nueva topico en el foro.  
+
+- **URL**: `/api/posts`  
+- **Autorización**: Requiere autenticación JWT.  
+- **Request Body (JSON)**:  
+  ```json
+
+
 ### **1. `/api/posts`**  
 
 #### **[POST] Crear una publicación**  
@@ -29,3 +48,16 @@ Permite a un usuario autenticado crear una nueva publicación en el foro.
       "author": "Nombre del autor",
       "topic": "Nombre del tema"
   }
+## 📦 Instalación y ejecución  
+
+### **1. Clonar el repositorio**  
+Clona este repositorio en tu máquina local:  
+```bash
+git clone https://github.com/tu-usuario/foro-hub-api.git
+cd foro-hub-api
+
+## Configuracion
+### Instalar dependencias
+mvn clean install
+### Ejecutar la applicacion
+mvn spring-boot:run
