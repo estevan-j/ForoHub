@@ -2,7 +2,7 @@
 
 Este proyecto es una API REST desarrollada con **Spring Boot**, diseñada para gestionar un foro en línea llamado **ForoHub**. La API incluye funcionalidades de creación, consulta de publicaciones y temas, además de autenticación y autorización mediante **JWT (JSON Web Tokens)** para garantizar la seguridad de las operaciones.
 
----
+## Tecnologias
 
 ## 📑 Características principales  
 
@@ -15,26 +15,38 @@ Este proyecto es una API REST desarrollada con **Spring Boot**, diseñada para g
 
 ## 🚀 Endpoints de la API  
 
-### **1. `/api/login`**  
+### **`/api/login`**  
 
 #### **[POST] Login**  
 Permite a un usuario autenticarse en la app.  
 
-- **URL**: `/api/posts`  
+- **URL**: `/api/login`  
 - **Request Body (JSON)**:  
   ```json
-
-### **1. `/api/topics`** 
+  {
+      "username": "username",
+      "password": "password"
+  }
+### **`/api/topics`** 
 #### **[POST] Crear una topico**  
 Permite a un usuario autenticado crear una nueva topico en el foro.  
 
-- **URL**: `/api/posts`  
+- **URL**: `/api/topics`  
 - **Autorización**: Requiere autenticación JWT.  
 - **Request Body (JSON)**:  
   ```json
+  {
+    "title": "topic title",
+    "message": "a simple message",
+    "author": "author of the topic",
+    "course": "class, category, type"
+  }
 
-
-### **1. `/api/posts`**  
+#### **[PUT, DELETE, GET] topic**  
+- **URL**: `/api/topics/id`  
+- **Autorización**: Requiere autenticación JWT.  
+- **Request Body (JSON)**:  
+### **`/api/posts`**  
 
 #### **[POST] Crear una publicación**  
 Permite a un usuario autenticado crear una nueva publicación en el foro.  
@@ -48,16 +60,24 @@ Permite a un usuario autenticado crear una nueva publicación en el foro.
       "author": "Nombre del autor",
       "topic": "Nombre del tema"
   }
-## 📦 Instalación y ejecución  
 
+#### **[PUT, DELETE, GET] post**  
+- **URL**: `/api/posts/id`  
+- **Autorización**: Requiere autenticación JWT.  
+- **Request Body (JSON)**
+  
 ### **1. Clonar el repositorio**  
 Clona este repositorio en tu máquina local:  
 ```bash
 git clone https://github.com/tu-usuario/foro-hub-api.git
 cd foro-hub-api
-
+```
 ## Configuracion
 ### Instalar dependencias
+``` bash
 mvn clean install
+```
 ### Ejecutar la applicacion
+``` bash
 mvn spring-boot:run
+```
